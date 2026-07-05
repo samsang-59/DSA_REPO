@@ -16,11 +16,10 @@ class Solution {
     public boolean isFeasible(int mid , int[] weights , int days){
         int Days = 1 , capacity = 0;
         for(int i=0;i<weights.length;i++){
-            if(capacity + weights[i] > mid){
+            capacity += weights[i];
+            if(capacity > mid){
                 capacity = weights[i];
                 Days++;
-            }else{
-               capacity += weights[i];
             }
         }
 
