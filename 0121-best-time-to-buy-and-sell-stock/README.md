@@ -29,3 +29,23 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 	<li><code>1 &lt;= prices.length &lt;= 10<sup>5</sup></code></li>
 	<li><code>0 &lt;= prices[i] &lt;= 10<sup>4</sup></code></li>
 </ul>
+
+---
+
+## Solution Notes — `0121-best-time-to-buy-and-sell-stock.java`
+
+**Problem:** Best Time to Buy and Sell Stock
+**Language:** Java
+
+### Pattern / Technique
+Greedy / Single Pass (Track Minimum So Far)
+
+### Approach
+Walk the array once keeping the minimum price seen so far (`minPrice`). At each day, the best possible profit if sold today is `prices[i] - minPrice`; track the max of that across all days.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1)
+
+### Notes
+Equivalent to a one-transaction variant of Kadane's algorithm on the price-difference array.
