@@ -50,3 +50,23 @@ It is obvious that we can make two bouquets in different ways.
 	<li><code>1 &lt;= m &lt;= 10<sup>6</sup></code></li>
 	<li><code>1 &lt;= k &lt;= n</code></li>
 </ul>
+
+---
+
+## Solution Notes — `1482-minimum-number-of-days-to-make-m-bouquets.java`
+
+**Problem:** Minimum Number of Days to Make m Bouquets
+**Language:** Java
+
+### Pattern / Technique
+Binary Search on Answer
+
+### Approach
+Binary search the day count over `[min(bloomDay), max(bloomDay)]`. `isFeasible(mid)` walks the flowers, counting consecutive already-bloomed (`bloomDay[i] <= mid`) runs of length `k` as completed bouquets, and checks whether at least `m` bouquets can be made by day `mid`. An early length check (`bloomDay.length < m*k`) returns -1 immediately when it's impossible regardless of days.
+
+### Complexity
+- **Time:** O(n log(max(bloomDay) - min(bloomDay)))
+- **Space:** O(1)
+
+### Notes
+Bouquets require *consecutive* bloomed flowers, so `isFeasible` resets its running streak whenever an unbloomed flower is hit.
