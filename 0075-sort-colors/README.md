@@ -30,3 +30,23 @@
 
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong>&nbsp;Could you come up with a one-pass algorithm using only&nbsp;constant extra space?</p>
+
+---
+
+## Solution Notes — `0075-sort-colors.java`
+
+**Problem:** Sort Colors
+**Language:** Java
+
+### Pattern / Technique
+Dutch National Flag Algorithm (3-Way Partitioning)
+
+### Approach
+Three pointers `low`, `mid`, `high` partition the array into 0s, 1s, and 2s in a single pass. `nums[mid] == 0` swaps with `low` and advances both `low`/`mid`; `nums[mid] == 1` just advances `mid`; `nums[mid] == 2` swaps with `high` and shrinks `high` (without advancing `mid`, since the swapped-in value is unchecked).
+
+### Complexity
+- **Time:** O(n) - single pass
+- **Space:** O(1) - in-place swaps
+
+### Notes
+Solves the problem in one pass without a counting sort / extra array.
