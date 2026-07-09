@@ -39,3 +39,23 @@
 
 <p>&nbsp;</p>
 <strong>Follow-up:&nbsp;</strong>Can you come up with an algorithm that is less than <code>O(n<sup>2</sup>)</code><font face="monospace">&nbsp;</font>time complexity?
+
+---
+
+## Solution Notes — `0001-two-sum.java`
+
+**Problem:** Two Sum
+**Language:** Java
+
+### Pattern / Technique
+Hashing (Complement Search)
+
+### Approach
+Iterate the array once. For each element `x` at index `i`, compute `complement = target - x`. If the complement is already a key in `map`, we've found the pair -> record `map.get(complement)` and `i`. Otherwise store `x -> i` in the map so a future element can find it as its complement.
+
+### Complexity
+- **Time:** O(n) - single pass over the array
+- **Space:** O(n) - HashMap can hold up to n entries
+
+### Notes
+Only one pass is needed because we check for the complement *before* inserting the current element, avoiding using the same element twice.
