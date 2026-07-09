@@ -28,3 +28,23 @@
 	<li>All the integers in <code>nums</code> are <strong>unique</strong>.</li>
 	<li><code>nums</code> is sorted in ascending order.</li>
 </ul>
+
+---
+
+## Solution Notes — `0704-binary-search.java`
+
+**Problem:** Binary Search
+**Language:** Java
+
+### Pattern / Technique
+Binary Search
+
+### Approach
+Standard iterative binary search: compute `mid`, compare `nums[mid]` to `target`, and narrow `[low, high]` accordingly until found or the range is empty.
+
+### Complexity
+- **Time:** O(log n)
+- **Space:** O(1)
+
+### Notes
+The canonical binary search template that all the other binary-search-on-answer solutions in this repo build on.
