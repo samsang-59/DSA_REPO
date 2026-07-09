@@ -33,3 +33,23 @@
 	<li><code>3 &lt;= s.length &lt;= 5 x 10^4</code></li>
 	<li><code>s</code>&nbsp;only consists of&nbsp;<em>a</em>, <em>b</em> or <em>c&nbsp;</em>characters.</li>
 </ul>
+
+---
+
+## Solution Notes — `1358-number-of-substrings-containing-all-three-characters.java`
+
+**Problem:** Number of Substrings Containing All Three Characters
+**Language:** Java
+
+### Pattern / Technique
+Sliding Window (Fixed Contribution Counting)
+
+### Approach
+`cnt[3]` tracks counts of 'a', 'b', 'c' in the window `[start, end]`. Once the window contains all three characters, every substring formed by extending the *right* boundary further (up to `s.length() - 1`) is also valid, so `s.length() - end` valid substrings are added at once; then shrink from `start` to look for the next minimal valid window.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1) - fixed 3-size counter array
+
+### Notes
+The `s.length() - end` bulk-add is the key trick: it counts all substrings sharing the current minimal valid window without an inner loop.
