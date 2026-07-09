@@ -44,3 +44,23 @@ If we had started at the first tree, we would only pick from trees [1,2].
 	<li><code>1 &lt;= fruits.length &lt;= 10<sup>5</sup></code></li>
 	<li><code>0 &lt;= fruits[i] &lt; fruits.length</code></li>
 </ul>
+
+---
+
+## Solution Notes — `0904-fruit-into-baskets.java`
+
+**Problem:** Fruit Into Baskets
+**Language:** Java
+
+### Pattern / Technique
+Sliding Window (At Most K Distinct Elements, K = 2)
+
+### Approach
+A frequency `map` tracks fruit types currently in the window `[start, end]`. Whenever the window holds more than 2 distinct types, shrink from `start` (decrementing/removing counts) until only 2 remain, then update `maxLen`.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1) - the map never holds more than 3 keys at once
+
+### Notes
+This is really "longest substring with at most 2 distinct characters" in disguise.
