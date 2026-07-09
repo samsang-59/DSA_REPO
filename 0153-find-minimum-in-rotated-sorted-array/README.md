@@ -46,3 +46,23 @@
 	<li>All the integers of <code>nums</code> are <strong>unique</strong>.</li>
 	<li><code>nums</code> is sorted and rotated between <code>1</code> and <code>n</code> times.</li>
 </ul>
+
+---
+
+## Solution Notes — `0153-find-minimum-in-rotated-sorted-array.java`
+
+**Problem:** Find Minimum in Rotated Sorted Array
+**Language:** Java
+
+### Pattern / Technique
+Modified Binary Search (Rotated Array)
+
+### Approach
+At each `mid`, check which half is sorted. If `nums[low] <= nums[mid]`, the left half is sorted so `nums[low]` is a candidate minimum and we move right (`low = mid + 1`); otherwise the right half is sorted, `nums[mid]` is a candidate, and we move left (`high = mid - 1`). Track the smallest candidate seen in `ans`.
+
+### Complexity
+- **Time:** O(log n)
+- **Space:** O(1)
+
+### Notes
+Because one half is always sorted, its first element is always a valid minimum candidate.
