@@ -32,3 +32,23 @@
 
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> A linked list can be reversed either iteratively or recursively. Could you implement both?</p>
+
+---
+
+## Solution Notes — `0206-reverse-linked-list.java`
+
+**Problem:** Reverse Linked List
+**Language:** Java
+
+### Pattern / Technique
+In-Place Linked List Reversal (Iterative, Three Pointers)
+
+### Approach
+Maintain `prev`, `curr`, and `Next` pointers. At each step, point `curr.next` back to `prev`, then advance `prev = curr` and `curr = Next` (precomputed before the link was broken).
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1)
+
+### Notes
+Iterative reversal avoids the O(n) call-stack space a recursive version would use.
