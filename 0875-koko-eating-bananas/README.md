@@ -36,3 +36,23 @@
 	<li><code>piles.length &lt;= h &lt;= 10<sup>9</sup></code></li>
 	<li><code>1 &lt;= piles[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
+
+---
+
+## Solution Notes — `0875-koko-eating-bananas.java`
+
+**Problem:** Koko Eating Bananas
+**Language:** Java
+
+### Pattern / Technique
+Binary Search on Answer
+
+### Approach
+Binary search over possible eating speeds in `[1, max(piles)]`. `isFeasible(mid)` sums `ceil(piles[i] / mid)` hours needed for each pile and checks the total against `h`. Whenever `mid` is feasible, record it as a candidate answer and search for a smaller (slower) speed; otherwise search faster.
+
+### Complexity
+- **Time:** O(n log(max(piles)))
+- **Space:** O(1)
+
+### Notes
+The monotonic property (larger speed -> fewer/equal hours needed) is what makes binary search on the answer valid.
