@@ -27,3 +27,23 @@
 	<li><code>nums</code> is an ascending array that is possibly rotated.</li>
 	<li><code>-10<sup>4</sup> &lt;= target &lt;= 10<sup>4</sup></code></li>
 </ul>
+
+---
+
+## Solution Notes — `0033-search-in-rotated-sorted-array.java`
+
+**Problem:** Search in Rotated Sorted Array
+**Language:** Java
+
+### Pattern / Technique
+Modified Binary Search (Rotated Array)
+
+### Approach
+Standard binary search, but at each `mid` we first figure out which half is sorted by comparing `nums[low]` with `nums[mid]`. If the left half `[low..mid]` is sorted and `target` falls inside `[nums[low], nums[mid]]`, search left; otherwise search right. Symmetric logic applies when the right half is the sorted one.
+
+### Complexity
+- **Time:** O(log n)
+- **Space:** O(1)
+
+### Notes
+No duplicates allowed, which is what makes the sorted-half decision always unambiguous.
