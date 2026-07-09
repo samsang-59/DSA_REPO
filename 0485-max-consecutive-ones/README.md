@@ -23,3 +23,23 @@
 	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
 	<li><code>nums[i]</code> is either <code>0</code> or <code>1</code>.</li>
 </ul>
+
+---
+
+## Solution Notes — `0485-max-consecutive-ones.java`
+
+**Problem:** Max Consecutive Ones
+**Language:** Java
+
+### Pattern / Technique
+Linear Scan (Running Counter Reset on Zero)
+
+### Approach
+Keep a running `count` of consecutive 1s seen; reset it to 0 whenever a 0 is hit. Track the maximum `count` seen across the array.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1)
+
+### Notes
+Simplest linear-scan counter pattern - no window bounds needed since there's no shrink logic.
