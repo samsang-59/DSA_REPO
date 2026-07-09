@@ -34,3 +34,23 @@
 	<li><code>1 &lt;= nums[i] &lt;= 10^5</code></li>
 	<li><code>1 &lt;= k &lt;= nums.length</code></li>
 </ul>
+
+---
+
+## Solution Notes — `1248-count-number-of-nice-subarrays.java`
+
+**Problem:** Count Number of Nice Subarrays
+**Language:** Java
+
+### Pattern / Technique
+Sliding Window - "AtMost(K) - AtMost(K-1)" Trick (odd/even transform)
+
+### Approach
+First transform the array in place: odd numbers become 1, even numbers become 0. The problem then reduces to counting subarrays with an exact sum of `k`, solved via the reusable `AtMost(sum <= target)` window helper and the `AtMost(k) - AtMost(k - 1)` subtraction.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1) - transformation and window are both in-place / constant extra space
+
+### Notes
+Turning "count of odd numbers" into a 0/1 array is what lets this reuse the exact same AtMost helper as problem 930.
