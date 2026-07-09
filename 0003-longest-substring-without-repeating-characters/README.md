@@ -33,3 +33,23 @@ Notice that the answer must be a substring, &quot;pwke&quot; is a subsequence an
 	<li><code>0 &lt;= s.length &lt;= 5 * 10<sup>4</sup></code></li>
 	<li><code>s</code> consists of English letters, digits, symbols and spaces.</li>
 </ul>
+
+---
+
+## Solution Notes — `0003-longest-substring-without-repeating-characters.java`
+
+**Problem:** Longest Substring Without Repeating Characters
+**Language:** Java
+
+### Pattern / Technique
+Sliding Window (variable size) + HashSet
+
+### Approach
+`start`/`end` define the current window. While `s.charAt(end)` is not in `set`, add it, update `maxLen`, and expand `end`. When a repeat is found, shrink the window by removing `s.charAt(start)` from `set` and advancing `start`, repeating until the duplicate is gone.
+
+### Complexity
+- **Time:** O(n) - each character is added and removed from the set at most once
+- **Space:** O(min(n, charset)) - set stores at most one entry per unique character in the window
+
+### Notes
+Classic variable-size sliding window: grow greedily, shrink only on violation.
