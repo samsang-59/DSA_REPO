@@ -44,3 +44,23 @@ So nums is rearranged to [1,-1].
 
 <p>&nbsp;</p>
 It is not required to do the modifications in-place.
+
+---
+
+## Solution Notes — `2149-rearrange-array-elements-by-sign.java`
+
+**Problem:** Rearrange Array Elements by Sign
+**Language:** Java
+
+### Pattern / Technique
+Two Pointers (Separate Even/Odd Index Placement)
+
+### Approach
+`posIndex` starts at 0 and `negIndex` starts at 1, both stepping by 2. In a single pass, positive numbers are placed at `posIndex` (next available even slot) and negative numbers at `negIndex` (next available odd slot), producing the alternating +/- output directly without any post-processing.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(n) - separate output array required (input order can't be reused in place)
+
+### Notes
+Because positives and negatives are equal in count (per problem constraints), the two interleaved pointers always land exactly on the correct final positions.
