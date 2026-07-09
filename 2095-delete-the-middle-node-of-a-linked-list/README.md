@@ -45,3 +45,23 @@ Node 0 with value 2 is the only node remaining after removing node 1.</pre>
 	<li>The number of nodes in the list is in the range <code>[1, 10<sup>5</sup>]</code>.</li>
 	<li><code>1 &lt;= Node.val &lt;= 10<sup>5</sup></code></li>
 </ul>
+
+---
+
+## Solution Notes — `2095-delete-the-middle-node-of-a-linked-list.java`
+
+**Problem:** Delete the Middle Node of a Linked List
+**Language:** Java
+
+### Pattern / Technique
+Fast & Slow Pointers (offset by one) + Dummy Node
+
+### Approach
+A `dummy` node is placed before `head` so removing the middle node (or the only node) never needs a special case. `fast` starts at `head` while `slow` starts one node behind it at `dummy` — this deliberate one-node offset is what makes `slow` land on the node *just before* the `⌊n/2⌋`-th middle node once `fast` runs off the end, instead of landing on the middle node itself. Both pointers then advance together (`fast` by two, `slow` by one) until `fast` (or `fast.next`) is `null`. Finally `slow.next = slow.next.next` unlinks the middle node, and `dummy.next` is returned as the new head.
+
+### Complexity
+- **Time:** O(n) — single pass
+- **Space:** O(1) — only the dummy node and two pointers are used
+
+### Notes
+This is the same fast/slow pointer idea as problems 876 and 234, but with `slow` deliberately starting one step behind `fast` (at `dummy` instead of `head`) so it stops one node short of the middle — exactly where it needs to be to unlink it.
