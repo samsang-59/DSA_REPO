@@ -28,3 +28,23 @@ There may exists other ways to achieve this answer too.</pre>
 	<li><code>s</code> consists of only uppercase English letters.</li>
 	<li><code>0 &lt;= k &lt;= s.length</code></li>
 </ul>
+
+---
+
+## Solution Notes — `0424-longest-repeating-character-replacement.java`
+
+**Problem:** Longest Repeating Character Replacement
+**Language:** Java
+
+### Pattern / Technique
+Sliding Window (variable size) + Frequency Array
+
+### Approach
+`counts[26]` tracks character frequency inside the window `[start, end]`; `maxFreq` tracks the count of the most frequent character seen in the window so far. The window is valid as long as `(windowLength - maxFreq) <= k` (i.e. the number of characters that need replacing fits the budget `k`); otherwise shrink from `start`.
+
+### Complexity
+- **Time:** O(n) - `maxFreq` is never decreased, but this is still correct because it only ever needs to grow the answer
+- **Space:** O(1) - fixed 26-size frequency array
+
+### Notes
+`maxFreq` deliberately isn't recomputed on shrink; the window can only get as large as the best window found so far, which is enough to compute the correct max length.
