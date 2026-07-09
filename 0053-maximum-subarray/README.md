@@ -35,3 +35,23 @@
 
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> If you have figured out the <code>O(n)</code> solution, try coding another solution using the <strong>divide and conquer</strong> approach, which is more subtle.</p>
+
+---
+
+## Solution Notes — `0053-maximum-subarray.java`
+
+**Problem:** Maximum Subarray
+**Language:** Java
+
+### Pattern / Technique
+Kadane's Algorithm (Greedy / DP)
+
+### Approach
+Track a running `currentSum`. At each element add it to `currentSum` and update `maxSum` with the running max. Whenever `currentSum` drops below 0, reset it to 0, since a negative prefix can never help a future subarray.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1)
+
+### Notes
+Kadane's algorithm is the standard maximum-subarray-sum technique.
