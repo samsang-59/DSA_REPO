@@ -26,3 +26,23 @@
 	<li>The number of nodes in the list is in the range <code>[1, 100]</code>.</li>
 	<li><code>1 &lt;= Node.val &lt;= 100</code></li>
 </ul>
+
+---
+
+## Solution Notes — `0876-middle-of-the-linked-list.java`
+
+**Problem:** Middle of the Linked List
+**Language:** Java
+
+### Pattern / Technique
+Fast & Slow Pointers (Tortoise and Hare)
+
+### Approach
+`fast` moves two nodes per step, `slow` moves one. When `fast` reaches the end of the list, `slow` is sitting at the middle node (the second middle for even-length lists, matching LeetCode's expected output).
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1)
+
+### Notes
+Avoids a two-pass approach (count length, then walk to n/2).
