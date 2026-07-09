@@ -38,3 +38,23 @@ You can rotate the array by x = 0 positions (i.e. no rotation) to make nums.
 	<li><code>1 &lt;= nums.length &lt;= 100</code></li>
 	<li><code>1 &lt;= nums[i] &lt;= 100</code></li>
 </ul>
+
+---
+
+## Solution Notes — `1752-check-if-array-is-sorted-and-rotated.java`
+
+**Problem:** Check if Array Is Sorted and Rotated
+**Language:** Java
+
+### Pattern / Technique
+Linear Scan (Circular Break-Point Counting)
+
+### Approach
+Iterate the array treating it as circular (`nums[(i + 1) % nums.length]`), counting `drop` each time an element is greater than the one after it. A valid sorted-and-rotated array can have at most one such break point.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1)
+
+### Notes
+The modulo wrap-around is what lets a single loop check both the rotation break and the wrap-around boundary in one pass.
