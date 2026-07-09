@@ -26,3 +26,23 @@ Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.
 	<li><code>nums[i]</code> is either <code>0</code> or <code>1</code>.</li>
 	<li><code>0 &lt;= k &lt;= nums.length</code></li>
 </ul>
+
+---
+
+## Solution Notes — `1004-max-consecutive-ones-iii.java`
+
+**Problem:** Max Consecutive Ones III
+**Language:** Java
+
+### Pattern / Technique
+Sliding Window (At Most K Zeros Allowed)
+
+### Approach
+Expand the window, counting zeros in `zeroCount`. When `zeroCount > k`, shrink from `start`, decrementing `zeroCount` if the removed element was a 0. Whenever `zeroCount <= k`, the current window is valid and `maxLen` is updated.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1)
+
+### Notes
+One of the most direct "at most K bad elements" sliding window templates.
