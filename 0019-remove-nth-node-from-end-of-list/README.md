@@ -34,3 +34,23 @@
 
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> Could you do this in one pass?</p>
+
+---
+
+## Solution Notes — `0019-remove-nth-node-from-end-of-list.java`
+
+**Problem:** Remove Nth Node From End of List
+**Language:** Java
+
+### Pattern / Technique
+Two Pointers (Fixed Gap) + Dummy Node
+
+### Approach
+A `dummy` node is inserted before `head` so the edge case of removing the head itself doesn't need special-casing. `fast` and `slow` both start at `dummy`. First, `fast` is advanced `n` steps ahead alone, opening up a gap of `n` nodes between `fast` and `slow`. Then both pointers advance together until `fast.next == null` (i.e. `fast` reaches the last node) — at that point `slow` is sitting exactly one node before the target, since the gap between them stayed fixed at `n`. Finally `slow.next = slow.next.next` unlinks the target node, and `dummy.next` is returned as the new head.
+
+### Complexity
+- **Time:** O(n) — single pass to open the gap plus one pass to walk it to the end, i.e. one overall traversal (satisfies the one-pass follow-up)
+- **Space:** O(1) — only the dummy node and two pointers are used
+
+### Notes
+The `dummy` node is what lets `slow.next = slow.next.next` safely remove the head node too, without a separate `if (n == length)` branch.
