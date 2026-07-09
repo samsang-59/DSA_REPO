@@ -33,3 +33,23 @@
 <p><strong>Follow up:</strong></p>
 
 <p>Could you solve this problem in less than O(n) complexity?</p>
+
+---
+
+## Solution Notes — `1539-kth-missing-positive-number.java`
+
+**Problem:** Kth Missing Positive Number
+**Language:** Java
+
+### Pattern / Technique
+Linear Scan (Missing-Count Adjustment)
+
+### Approach
+Walk the sorted array once. Each time `arr[i] <= k`, it means the array has "used up" one of the numbers that would otherwise have been counted toward the k-th missing positive, so `k` is incremented to compensate. Once `arr[i] > k`, the current `k` is already the answer, so the loop breaks.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1)
+
+### Notes
+An O(log n) binary-search version exists (binary search for the index where `arr[i] - i - 1 >= k`), but this implementation is the simpler linear-scan version.
