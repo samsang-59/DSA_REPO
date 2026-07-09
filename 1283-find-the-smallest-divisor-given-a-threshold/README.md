@@ -29,3 +29,23 @@ If the divisor is 4 we can get a sum of 7 (1+1+2+3) and if the divisor is 5 the 
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>6</sup></code></li>
 	<li><code>nums.length &lt;= threshold &lt;= 10<sup>6</sup></code></li>
 </ul>
+
+---
+
+## Solution Notes — `1283-find-the-smallest-divisor-given-a-threshold.java`
+
+**Problem:** Find the Smallest Divisor Given a Threshold
+**Language:** Java
+
+### Pattern / Technique
+Binary Search on Answer
+
+### Approach
+Binary search the divisor over `[1, max(nums)]`. `isFeasible(mid)` sums `ceil(nums[i] / mid)` for all elements (bailing out early if the running sum already exceeds `threshold`) and returns whether the total fits the threshold. Feasible values shrink the search toward the smallest valid divisor.
+
+### Complexity
+- **Time:** O(n log(max(nums)))
+- **Space:** O(1)
+
+### Notes
+Early-exit inside `isFeasible` avoids wasted summation once the threshold is already blown.
