@@ -40,3 +40,23 @@
 
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> Can you solve it using <code>O(1)</code> (i.e. constant) memory?</p>
+
+---
+
+## Solution Notes — `0142-linked-list-cycle-ii.java`
+
+**Problem:** Linked List Cycle II
+**Language:** Java
+
+### Pattern / Technique
+Floyd's Cycle Detection + Two-Pointer Meeting Point
+
+### Approach
+Phase 1: run fast/slow pointers until they meet inside the cycle (or fast hits `null`, meaning no cycle). Phase 2: reset `slow` to `head`, then move both `slow` and `fast` one step at a time; the node where they meet again is mathematically guaranteed to be the start of the cycle.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1)
+
+### Notes
+Relies on the classic proof that distance-from-head-to-cycle-start equals distance-from-meeting-point-to-cycle-start.
