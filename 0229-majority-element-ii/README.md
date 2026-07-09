@@ -32,3 +32,23 @@
 
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> Could you solve the problem in linear time and in <code>O(1)</code> space?</p>
+
+---
+
+## Solution Notes — `0229-majority-element-ii.java`
+
+**Problem:** Majority Element II
+**Language:** Java
+
+### Pattern / Technique
+Extended Boyer-Moore Voting Algorithm (n/3 majority, up to 2 candidates)
+
+### Approach
+Since at most 2 elements can appear more than `n/3` times, track two candidates (`c1`, `c2`) with two counters using the extended voting rules. A second pass over the array then verifies each candidate's true frequency exceeds `n/3` before adding it to the answer.
+
+### Complexity
+- **Time:** O(n) - two linear passes
+- **Space:** O(1)
+
+### Notes
+The verification pass is required because the voting phase alone can produce false-positive candidates.
