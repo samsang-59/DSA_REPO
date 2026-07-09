@@ -28,3 +28,23 @@
 	<li>The number of nodes in the linked list is in the range <code>[0, 10<sup>4</sup>]</code>.</li>
 	<li><code>-10<sup>6</sup> &lt;= Node.val &lt;= 10<sup>6</sup></code></li>
 </ul>
+
+---
+
+## Solution Notes — `0328-odd-even-linked-list.java`
+
+**Problem:** Odd Even Linked List
+**Language:** Java
+
+### Pattern / Technique
+Two Pointers (In-Place Interleaved List Splitting & Relinking)
+
+### Approach
+Two pointers walk the list one node apart: `even` starts at `head` (the odd-indexed chain: 1st, 3rd, 5th, ...) and `odd` starts at `head.next` (the even-indexed chain: 2nd, 4th, 6th, ...), with `evenHead`/`oddHead` saved as the two chains' starting points. On each iteration, `even.next` is rewired to skip over to the next odd-position node (`odd.next`) and `even` advances; symmetrically `odd.next` is rewired to the next even-position node and `odd` advances. This continues while both chains still have a following node. After the loop, `even.next = oddHead` splices the even-indexed chain onto the end of the odd-indexed chain, and `evenHead` (despite the variable name, this is the odd-indexed chain's head) is returned.
+
+### Complexity
+- **Time:** O(n) — single pass through the list
+- **Space:** O(1) — nodes are relinked in place, no new nodes allocated
+
+### Notes
+Variable naming is a bit misleading: `even`/`evenHead` actually track the *odd-indexed* (1st, 3rd, ...) chain and `odd`/`oddHead` track the *even-indexed* (2nd, 4th, ...) chain, per the problem's 1-indexed "first node is odd" convention. The loop condition checks `.next != null` on both pointers to safely stop before dereferencing past the list end on either odd or even total-length lists.
