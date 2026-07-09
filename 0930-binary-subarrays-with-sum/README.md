@@ -30,3 +30,23 @@
 	<li><code>nums[i]</code> is either <code>0</code> or <code>1</code>.</li>
 	<li><code>0 &lt;= goal &lt;= nums.length</code></li>
 </ul>
+
+---
+
+## Solution Notes — `0930-binary-subarrays-with-sum.java`
+
+**Problem:** Binary Subarrays With Sum
+**Language:** Java
+
+### Pattern / Technique
+Sliding Window - "AtMost(K) - AtMost(K-1)" Trick
+
+### Approach
+`AtMost(target)` counts subarrays whose sum is `<= target` using a shrinking window (shrink while `sum > target`, then add `end - start + 1` valid subarrays ending at `end`). The exact-sum answer is `AtMost(goal) - AtMost(goal - 1)`.
+
+### Complexity
+- **Time:** O(n) - `AtMost` is called twice, each a linear-time sliding window
+- **Space:** O(1)
+
+### Notes
+This subtraction trick converts an "exactly K" sliding-window problem (which has no clean single-window formulation) into two solvable "at most K" problems.
