@@ -33,3 +33,23 @@
 	<li><code>nums</code> contains <strong>distinct</strong> values sorted in <strong>ascending</strong> order.</li>
 	<li><code>-10<sup>4</sup> &lt;= target &lt;= 10<sup>4</sup></code></li>
 </ul>
+
+---
+
+## Solution Notes — `0035-search-insert-position.java`
+
+**Problem:** Search Insert Position
+**Language:** Java
+
+### Pattern / Technique
+Binary Search (Lower Bound)
+
+### Approach
+Binary search where, whenever `nums[mid] >= target`, we tentatively record `ans = mid` and keep searching left (`high = mid - 1`) to find the smallest index satisfying the condition. If `target` isn't found, `ans` ends up as the correct insertion index.
+
+### Complexity
+- **Time:** O(log n)
+- **Space:** O(1)
+
+### Notes
+This is the textbook lower_bound implementation.
