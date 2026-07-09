@@ -32,3 +32,23 @@
 	<li><code>1 &lt;= nums.length &lt;= 2 * 10<sup>4</sup></code></li>
 	<li><code>1 &lt;= nums[i], k &lt;= nums.length</code></li>
 </ul>
+
+---
+
+## Solution Notes — `0992-subarrays-with-k-different-integers.java`
+
+**Problem:** Subarrays with K Different Integers
+**Language:** Java
+
+### Pattern / Technique
+Sliding Window - "AtMost(K) - AtMost(K-1)" Trick with HashMap
+
+### Approach
+`AtMost(target)` counts subarrays with at most `target` distinct integers, using a frequency `map` and shrinking the window whenever `map.size() > target`. The exact-K answer is `AtMost(k) - AtMost(k - 1)`.
+
+### Complexity
+- **Time:** O(n) - two linear-time sliding window passes
+- **Space:** O(k) - map holds at most `target` distinct keys
+
+### Notes
+Same at-most-K subtraction trick as problem 930, generalized from a binary array to arbitrary distinct values.
