@@ -40,3 +40,23 @@
 
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> Can you solve it using <code>O(1)</code> (i.e. constant) memory?</p>
+
+---
+
+## Solution Notes — `0141-linked-list-cycle.java`
+
+**Problem:** Linked List Cycle
+**Language:** Java
+
+### Pattern / Technique
+Floyd's Cycle Detection (Fast & Slow Pointers)
+
+### Approach
+`fast` advances two nodes per step, `slow` advances one. If there's a cycle, `fast` eventually laps `slow` and they become equal; if `fast` (or `fast.next`) hits `null`, there is no cycle.
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1)
+
+### Notes
+The tortoise-and-hare technique avoids needing a hash set of visited nodes.
