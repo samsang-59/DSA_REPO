@@ -50,3 +50,23 @@ Note that the cargo must be shipped in the order given, so using a ship of capac
 	<li><code>1 &lt;= days &lt;= weights.length &lt;= 5 * 10<sup>4</sup></code></li>
 	<li><code>1 &lt;= weights[i] &lt;= 500</code></li>
 </ul>
+
+---
+
+## Solution Notes — `1011-capacity-to-ship-packages-within-d-days.java`
+
+**Problem:** Capacity To Ship Packages Within D Days
+**Language:** Java
+
+### Pattern / Technique
+Binary Search on Answer
+
+### Approach
+Binary search the ship capacity over `[max(weights), sum(weights)]`. `isFeasible(mid)` greedily simulates loading packages onto a ship of capacity `mid`, incrementing `Days` whenever the running load would exceed `mid`, and checks whether the simulated day count fits within `days`.
+
+### Complexity
+- **Time:** O(n log(sum(weights)))
+- **Space:** O(1)
+
+### Notes
+Lower bound `max(weights)` is required since no single package can be split across days.
