@@ -29,3 +29,23 @@
 	<li><code>-2<sup>31</sup> &lt;= nums[i] &lt;= 2<sup>31</sup> - 1</code></li>
 	<li><code>nums[i] != nums[i + 1]</code> for all valid <code>i</code>.</li>
 </ul>
+
+---
+
+## Solution Notes — `0162-find-peak-element.java`
+
+**Problem:** Find Peak Element
+**Language:** Java
+
+### Pattern / Technique
+Binary Search on Answer (Peak Finding via Local Slope)
+
+### Approach
+Compare `nums[mid]` to its neighbors. Handles the boundary cases (`mid == 0`, `mid == n-1`) explicitly, then for interior indices moves toward the side with a larger neighbor (ascending slope), since a peak is guaranteed to exist in that direction. If both neighbors are smaller, `mid` itself is a peak.
+
+### Complexity
+- **Time:** O(log n)
+- **Space:** O(1)
+
+### Notes
+Works because any ascending slope must terminate at a peak (array edges count as -infinity).
