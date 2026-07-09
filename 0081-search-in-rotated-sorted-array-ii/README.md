@@ -26,3 +26,23 @@
 
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> This problem is similar to&nbsp;<a href="/problems/search-in-rotated-sorted-array/description/" target="_blank">Search in Rotated Sorted Array</a>, but&nbsp;<code>nums</code> may contain <strong>duplicates</strong>. Would this affect the runtime complexity? How and why?</p>
+
+---
+
+## Solution Notes — `0081-search-in-rotated-sorted-array-ii.java`
+
+**Problem:** Search in Rotated Sorted Array II
+**Language:** Java
+
+### Pattern / Technique
+Modified Binary Search (Rotated Array with Duplicates)
+
+### Approach
+Same idea as problem 33, but adds a special case: when `nums[low] == nums[mid] == nums[high]`, we can't tell which half is sorted, so we shrink both ends by one (`low++`, `high--`) and try again.
+
+### Complexity
+- **Time:** O(log n) average, O(n) worst case (when many duplicates force the low++/high-- fallback)
+- **Space:** O(1)
+
+### Notes
+The duplicate-handling branch is what differentiates this from problem 33's guaranteed O(log n).
