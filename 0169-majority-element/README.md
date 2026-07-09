@@ -22,3 +22,23 @@
 
 <p>&nbsp;</p>
 <strong>Follow-up:</strong> Could you solve the problem in linear time and in <code>O(1)</code> space?
+
+---
+
+## Solution Notes — `0169-majority-element.java`
+
+**Problem:** Majority Element
+**Language:** Java
+
+### Pattern / Technique
+Boyer-Moore Voting Algorithm
+
+### Approach
+Maintain a `candidate` and a `count`. If `count == 0`, adopt the current element as the new candidate. Increment `count` when the current element matches `candidate`, otherwise decrement it. The surviving candidate after one pass is the majority element (guaranteed to exist per problem constraints).
+
+### Complexity
+- **Time:** O(n)
+- **Space:** O(1)
+
+### Notes
+No verification pass is needed here because the problem guarantees a majority element exists.
