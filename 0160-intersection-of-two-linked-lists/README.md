@@ -65,3 +65,23 @@ Explanation: The two lists do not intersect, so return null.
 
 <p>&nbsp;</p>
 <strong>Follow up:</strong> Could you write a solution that runs in <code>O(m + n)</code> time and use only <code>O(1)</code> memory?
+
+---
+
+## Solution Notes — `0160-intersection-of-two-linked-lists.java`
+
+**Problem:** Intersection of Two Linked Lists
+**Language:** Java
+
+### Pattern / Technique
+Two Pointers (Length-Equalization by Switching Heads)
+
+### Approach
+`pointerA` and `pointerB` walk their own lists (`headA`, `headB`) one node at a time. Whenever a pointer runs off the end of its own list (`== null`), it's redirected to the *other* list's head instead of stopping. This means each pointer effectively travels `lenA + lenB` nodes total by the time they can meet, so both pointers cover the same total distance and arrive at the intersection node (or `null`, if the lists don't intersect) at exactly the same step. The loop exits via `pointerA == pointerB`, which is true both at a genuine intersection and at the shared `null` case when there's no intersection.
+
+### Complexity
+- **Time:** O(m + n) — each pointer traverses at most both lists once
+- **Space:** O(1) — only two pointers, no extra data structures
+
+### Notes
+This avoids the more obvious approach of computing both list lengths up front and advancing the longer list's pointer by the difference — swapping heads on `null` achieves the same length-equalization implicitly, in a single unified loop.
