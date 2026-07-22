@@ -41,6 +41,26 @@ class Solution {
         return dp[m-1][n-1];
     }
 
+    public int space_optimization(int m , int n){
+        int[] prev = new int[n];
+        for(int i=0;i<prev.length;i++){
+            prev[i] = 1;
+        }
+
+        for(int i=1;i<m;i++){
+            int[] curr = new int[n];
+            curr[0] = 1;
+            for(int j=1;j<n;j++){
+                int down = prev[j];
+                int right = curr[j-1];
+                curr[j] = down + right;
+            }
+            prev = curr;
+        }
+
+        return prev[n-1];
+    }
+
     public int uniquePaths(int m, int n) {
         // RECCURENCE
         // return find_ans(m-1 , n-1);
@@ -54,10 +74,13 @@ class Solution {
         // }
         // return memoization(m-1 , n-1 , dp);
 
-        // TABULATION
 
-        int[][] dp = new int[m][n];
-        return tabulation(dp , m , n);
+        // TABULATION
+        // int[][] dp = new int[m][n];
+        // return tabulation(dp , m , n);
+
+        // SPACE OPTIMIZATION
+        return space_optimization(m , n);
 
     }
 }
