@@ -26,36 +26,38 @@ class Solution {
         // row filling
         int i = 0;
         while(i < dp[0].length){
-            if(obstacleGrid[0][0]==1) break;
+            if(obstacleGrid[0][i]==1) break;
             dp[0][i] = 1;
             i++;
         }
         // if you encountered an obstacle fill the rest with zeros
         while(i < dp[0].length){
             dp[0][i] = 0;
+            i++;
         }
         // column filling
         int j = 0;
         while(j < dp.length){
-            if(obstacleGrid[0][0]==1) break;
+            if(obstacleGrid[j][0]==1) break;
             dp[j][0] = 1;
             j++;
         }
         // if you encountered an obstacle fill the rest with zeros
         while(j < dp.length){
             dp[j][0] = 0;
+            j++;
         }
 
         for(int r=1;r<dp.length;r++){
             for(int c=1;c<dp[0].length;c++){
                 if(obstacleGrid[r][c]==1){
                     dp[r][c] = 0;
-                    break;
+                    continue;
                 }
                 
-                int down = dp[i-1][j];
-                int right = dp[i][j-1];
-                dp[i][j] = down + right;
+                int down = dp[r-1][c];
+                int right = dp[r][c-1];
+                dp[r][c] = down + right;
             }
         }
 
@@ -88,18 +90,18 @@ class Solution {
         // return find_ans(m-1 , n-1 , obstacleGrid);
 
         // MEMOIZATION
-        int[][] dp = new int[m][n];
-        for(int i=0;i<dp.length;i++){
-            for(int j=0;j<dp[0].length;j++){
-                dp[i][j] = -1;
-            }
-        }
-        return memoization(m-1 , n-1 , dp , obstacleGrid);
+        // int[][] dp = new int[m][n];
+        // for(int i=0;i<dp.length;i++){
+        //     for(int j=0;j<dp[0].length;j++){
+        //         dp[i][j] = -1;
+        //     }
+        // }
+        // return memoization(m-1 , n-1 , dp , obstacleGrid);
 
 
         // TABULATION
-        // int[][] dp = new int[m][n];
-        // return tabulation(dp , m , n ,obstacleGrid);
+        int[][] dp = new int[m][n];
+        return tabulation(dp , m , n ,obstacleGrid);
 
         // SPACE OPTIMIZATION
         // return space_optimization(m , n); 
