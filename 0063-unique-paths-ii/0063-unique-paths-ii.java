@@ -64,19 +64,32 @@ class Solution {
         return dp[m-1][n-1];
     }
 
-    public int space_optimization(int m , int n){
+    public int space_optimization(int m , int n , int[][] obstacleGrid){
         int[] prev = new int[n];
-        for(int i=0;i<prev.length;i++){
+        int i = 0;
+        while(i < prev.length){
+            if(obstacleGrid[0][i]==1) break;
             prev[i] = 1;
+            i++;
         }
 
-        for(int i=1;i<m;i++){
+        while(i < prev.length){
+            prev[i] = 0;
+            i++;
+        }
+
+        for(int r=1;r<m;r++){
             int[] curr = new int[n];
-            curr[0] = 1;
-            for(int j=1;j<n;j++){
-                int down = prev[j];
-                int right = curr[j-1];
-                curr[j] = down + right;
+            if(obstacleGrid[r][0]==1)curr[0] = 0;
+            else curr[0] = prev[0];
+            for(int c=1;c<n;c++){
+                if(obstacleGrid[r][c]==1){
+                    curr[c] = 0;
+                    continue;
+                }
+                int down = prev[c];
+                int right = curr[c-1];
+                curr[c] = down + right;
             }
             prev = curr;
         }
@@ -100,11 +113,11 @@ class Solution {
 
 
         // TABULATION
-        int[][] dp = new int[m][n];
-        return tabulation(dp , m , n ,obstacleGrid);
+        // int[][] dp = new int[m][n];
+        // return tabulation(dp , m , n ,obstacleGrid);
 
         // SPACE OPTIMIZATION
-        // return space_optimization(m , n); 
+        return space_optimization(m , n , obstacleGrid); 
 
     }
 }
