@@ -44,6 +44,30 @@ class Solution {
         return dp[0][target];
     }
 
+    public int space_optimization(int[] nums , int target){
+        int[] next = new int[target+1];
+        next[0] = 1;
+        for(int i=1;i<next.length;i++){
+            next[i] = 0;
+        }
+
+         for(int i=nums.length - 1;i>=0;i--){
+            int[] curr = new int[target + 1];
+            curr[0] = 1;
+            for(int j=0;j<target+1;j++){
+                int not_pick = next[j];
+                int pick = 0;
+                if(j >= nums[i]) pick = next[j-nums[i]];
+                if(pick==1 || not_pick==1) curr[j] = 1;
+                else curr[j] = 0;
+            }
+            next = curr;
+        }
+        return next[target];
+
+
+    }
+
     public int find_sum(int[] nums){
         int sum = 0;
         for(int i=0;i<nums.length;i++){
@@ -72,8 +96,14 @@ class Solution {
         // return false;
 
         // TABULATION
-        int[][] dp = new int[nums.length+1][target+1];
-        int ans = tabulation(dp , nums , target);
+        // int[][] dp = new int[nums.length+1][target+1];
+        // int ans = tabulation(dp , nums , target);
+        // if(ans==1) return true;
+        // return false;
+
+        // SPACE - OPTIMIZATION
+
+        int ans = space_optimization(nums , target);
         if(ans==1) return true;
         return false;
     }
