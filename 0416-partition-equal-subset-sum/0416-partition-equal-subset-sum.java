@@ -23,6 +23,27 @@ class Solution {
         return dp[index][target];
     }
 
+    public int tabulation(int[][] dp , int[] nums , int target){
+        for(int i=0;i<dp.length;i++){
+            dp[i][0] = 1;
+        }
+
+        for(int i=1;i<dp[0].length;i++){
+            dp[nums.length][i] = 0;
+        }
+
+        for(int i=nums.length - 1;i>=0;i--){
+            for(int j=0;j<target+1;j++){
+                int not_pick = dp[i+1][j];
+                int pick = 0;
+                if(j >= nums[i]) pick = dp[i+1][j-nums[i]];
+                if(pick==1 || not_pick==1) dp[i][j] = 1;
+                else dp[i][j] = 0;
+            }
+        }
+        return dp[0][target];
+    }
+
     public int find_sum(int[] nums){
         int sum = 0;
         for(int i=0;i<nums.length;i++){
@@ -39,14 +60,20 @@ class Solution {
         // return find_ans( 0 , nums , target);
 
         // MEMOIZATION
-        int[][] dp = new int[nums.length+1][target+1];
-        for(int i=0;i<dp.length;i++){
-            for(int j=0;j<dp[0].length;j++){
-                dp[i][j] = -1;
-            }
-        }
+        // int[][] dp = new int[nums.length+1][target+1];
+        // for(int i=0;i<dp.length;i++){
+        //     for(int j=0;j<dp[0].length;j++){
+        //         dp[i][j] = -1;
+        //     }
+        // }
 
-        int ans = memoization(dp , nums , 0 , target);
+        // int ans = memoization(dp , nums , 0 , target);
+        // if(ans==1) return true;
+        // return false;
+
+        // TABULATION
+        int[][] dp = new int[nums.length+1][target+1];
+        int ans = tabulation(dp , nums , target);
         if(ans==1) return true;
         return false;
     }
