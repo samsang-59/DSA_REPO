@@ -24,6 +24,26 @@ class Solution {
         return dp[index][amount];
     }
 
+    public int tabulation(int[] coins , int amount , int[][] dp){
+        for(int i=1;i<dp[0].length;i++){
+            dp[coins.length][i] = (int)1e9;
+        }
+
+        for(int i=0;i<dp.length;i++){
+            dp[i][0] = 0;
+        }
+
+        for(int i=coins.length-1;i>=0;i--){
+            for(int j=0;j<amount+1;j++){
+                int not_pick = dp[i+1][j];
+                int pick = Integer.MAX_VALUE;
+                if(coins[i] <= j) pick = 1 + dp[i][j-coins[i]];
+                dp[i][j] = Math.min(pick , not_pick);
+            }
+        }
+            return dp[0][amount];
+    }
+
     public int coinChange(int[] coins, int amount) {
 
         // RECURRSION
@@ -31,14 +51,20 @@ class Solution {
         // if(ans >= (int)1e9) return -1;
         // else return ans;
 
-        // memoization
+        // MEMOIZATION
+        // int[][] dp = new int[coins.length+1][amount+1];
+        // for(int i=0;i<dp.length;i++){
+        //     for(int j=0;j<dp[0].length;j++){
+        //         dp[i][j] = -1;
+        //     }
+        // }
+        // int ans = memoization(coins , amount , dp , 0);
+        // if(ans>=(int)1e9) return -1;
+        // else return ans;
+
+        // TABULATION
         int[][] dp = new int[coins.length+1][amount+1];
-        for(int i=0;i<dp.length;i++){
-            for(int j=0;j<dp[0].length;j++){
-                dp[i][j] = -1;
-            }
-        }
-        int ans = memoization(coins , amount , dp , 0);
+        int ans = tabulation(coins , amount , dp);
         if(ans>=(int)1e9) return -1;
         else return ans;
     }
