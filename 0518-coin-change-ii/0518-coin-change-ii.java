@@ -25,18 +25,42 @@ class Solution {
         return dp[index][amount];
     }
 
+    public int tabulation(int[][] dp , int[] coins , int amount){
+        for(int i=1;i<dp[0].length;i++){
+            dp[coins.length][i] = 0;
+        }
+
+        for(int i=0;i<dp.length;i++){
+            dp[i][0] = 1;
+        }
+
+        for(int i=coins.length-1;i>=0;i--){
+            for(int j=0;j<amount+1;j++){
+                int not_pick = dp[i+1][j];
+                int pick = 0;
+                if(j >= coins[i]) pick = dp[i][j-coins[i]];
+                dp[i][j] = pick + not_pick;
+            }
+        }
+        return dp[0][amount];
+    }
+
     public int change(int amount, int[] coins) {
         // RECURRSION
         // return recurrsion(0 , amount , coins);
 
         // MEMOIZATION
-        int[][] dp = new int[coins.length+1][amount+1];
-        for(int i=0;i<dp.length;i++){
-            for(int j=0;j<dp[0].length;j++){
-                dp[i][j] = -1;
-            }
-        }
+        // int[][] dp = new int[coins.length+1][amount+1];
+        // for(int i=0;i<dp.length;i++){
+        //     for(int j=0;j<dp[0].length;j++){
+        //         dp[i][j] = -1;
+        //     }
+        // }
 
-        return memoization(0 , amount , coins , dp);
+        // return memoization(0 , amount , coins , dp);
+
+        // TABULATION
+        int[][] dp = new int[coins.length+1][amount+1];
+        return tabulation(dp , coins , amount);
     }
 }
