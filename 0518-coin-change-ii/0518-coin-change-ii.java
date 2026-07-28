@@ -45,6 +45,29 @@ class Solution {
         return dp[0][amount];
     }
 
+    public int space_optimization(int[] coins , int amount){
+        int[] next = new int[amount+1];
+        next[0] = 1;
+        for(int i=1;i<next.length;i++){
+            next[i] = 0;
+        }
+
+        for(int i=coins.length-1;i>=0;i--){
+            int[] curr = new int[amount+1];
+            curr[0] = 1;
+            for(int j=0;j<amount+1;j++){
+                int not_pick = next[j];
+                int pick = 0;
+                if(j >= coins[i]) pick = curr[j-coins[i]];
+                curr[j] = pick + not_pick;
+            }
+            next = curr;
+        }
+        return next[amount];
+
+
+    }
+
     public int change(int amount, int[] coins) {
         // RECURRSION
         // return recurrsion(0 , amount , coins);
@@ -60,7 +83,10 @@ class Solution {
         // return memoization(0 , amount , coins , dp);
 
         // TABULATION
-        int[][] dp = new int[coins.length+1][amount+1];
-        return tabulation(dp , coins , amount);
+        // int[][] dp = new int[coins.length+1][amount+1];
+        // return tabulation(dp , coins , amount);
+
+        // SPACE-OPTIMIZATION
+        return space_optimization(coins , amount);
     }
 }
