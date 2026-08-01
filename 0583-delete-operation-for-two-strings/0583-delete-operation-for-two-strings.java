@@ -52,6 +52,11 @@ class Solution {
     }
 
     public int space_optimization(String s , String rev){
+
+        if(s.length() < rev.length()) {
+            return space_optimization(rev , s);
+        }
+
         int[] next = new int[s.length()+1];
 
         for(int i=0;i<next.length;i++){
@@ -92,11 +97,12 @@ class Solution {
         // return word1.length() - LCS + word2.length() - LCS;
 
         // TABULATION
-        int[][] dp = new int[word1.length()+1][word2.length()+1];
-        int LCS = tabulation(word1 , word2 , dp);
-        return word1.length() - LCS + word2.length() - LCS;
+        // int[][] dp = new int[word1.length()+1][word2.length()+1];
+        // int LCS = tabulation(word1 , word2 , dp);
+        // return word1.length() - LCS + word2.length() - LCS;
 
         // SPACE_OPTIMIZATION
-        // return space_optimization(s , rev);
+        int LCS = space_optimization(word1 , word2);
+        return word1.length() - LCS + word2.length() - LCS;
     }
 }
