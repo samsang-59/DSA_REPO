@@ -27,6 +27,30 @@ class Solution {
         return dp[i][j];
     }
 
+    public int tabulation(String s , String rev , int[][] dp){
+        for(int i=0;i<dp[0].length;i++){
+            dp[s.length()][i] = 0;
+        }
+
+        for(int j=0;j<dp.length;j++){
+            dp[j][rev.length()] = 0;
+        }
+
+        for(int i=s.length()-1;i>=0;i--){
+            for(int j=rev.length()-1;j>=0;j--){
+                int pick = 0 , not_pick = 0;
+                if(s.charAt(i)==rev.charAt(j)){
+                    pick = 1 + dp[i+1][j+1];
+                }
+                else{
+                    not_pick = Math.max(dp[i+1][j] , dp[i][j+1]);
+                }
+                dp[i][j] = Math.max(pick , not_pick);
+            }
+        }
+        return dp[0][0];
+    }
+
     public int longestPalindromeSubseq(String s) {
         
         String rev = new StringBuilder(s).reverse().toString();
@@ -35,12 +59,16 @@ class Solution {
         // return recurrsion(s , rev , 0 , 0);
 
         // MEMOIZATION
+        // int[][] dp = new int[s.length()+1][rev.length()+1];
+        // for(int i=0;i<dp.length;i++){
+        //     for(int j=0;j<dp.length;j++){
+        //         dp[i][j] = -1;
+        //     }
+        // }
+        // return memoization(s , rev , 0 , 0 , dp);
+
+        // TABULATION
         int[][] dp = new int[s.length()+1][rev.length()+1];
-        for(int i=0;i<dp.length;i++){
-            for(int j=0;j<dp.length;j++){
-                dp[i][j] = -1;
-            }
-        }
-        return memoization(s , rev , 0 , 0 , dp);
+        return tabulation(s , rev , dp);
     }
 }
