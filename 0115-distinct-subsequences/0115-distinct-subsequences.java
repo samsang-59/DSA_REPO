@@ -57,6 +57,33 @@ class Solution {
         return dp[0][0];
     }
 
+    public int space_optimization(String s , String t){
+        int[] next = new int[t.length()+1];
+        for(int i=0;i<next.length-1;i++){
+            next[i] = 0;
+        }
+
+        next[t.length()] = 1;
+
+        for(int i=s.length()-1;i>=0;i--){
+            int[] curr = new int[t.length()+1];
+            curr[t.length()] = 1;
+            for(int j=t.length()-1;j>=0;j--){
+                int pick = 0 , not_pick = 0;
+                if(s.charAt(i)==t.charAt(j)){
+                    pick = next[j+1];
+                    not_pick = next[j];
+                }
+                else{
+                    not_pick = next[j];
+                }
+                curr[j] = pick + not_pick ;
+            }
+            next = curr;
+        }
+        return next[0];
+    }
+
     public int numDistinct(String s, String t) {
         
         // RECURRSION
@@ -72,7 +99,10 @@ class Solution {
         // return memoization(s , t , 0 , 0 , dp);
 
         // TABULATION
-        int[][] dp = new int[s.length()+1][t.length()+1];
-        return tabulation(s , t , dp);
+        // int[][] dp = new int[s.length()+1][t.length()+1];
+        // return tabulation(s , t , dp);
+
+        // SPACE_OPTIMIZATION
+        return space_optimization(s , t);
     }
 }
