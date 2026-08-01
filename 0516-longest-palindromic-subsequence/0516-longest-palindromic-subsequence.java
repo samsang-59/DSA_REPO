@@ -51,6 +51,31 @@ class Solution {
         return dp[0][0];
     }
 
+    public int space_optimization(String s , String rev){
+        int[] next = new int[s.length()+1];
+
+        for(int i=0;i<next.length;i++){
+            next[i] = 0;
+        }
+
+        for(int i=s.length()-1;i>=0;i--){
+            int[] curr = new int[rev.length()+1];
+            curr[rev.length()] = 0;
+            for(int j=rev.length()-1;j>=0;j--){
+                int pick = 0 , not_pick = 0;
+                if(s.charAt(i)==rev.charAt(j)){
+                    pick = 1 + next[j+1];
+                }
+                else{
+                    not_pick = Math.max(next[j] , curr[j+1]);
+                }
+                curr[j] = Math.max(pick , not_pick);
+            }
+            next = curr;
+        }
+        return next[0];
+    }
+
     public int longestPalindromeSubseq(String s) {
         
         String rev = new StringBuilder(s).reverse().toString();
@@ -68,7 +93,10 @@ class Solution {
         // return memoization(s , rev , 0 , 0 , dp);
 
         // TABULATION
-        int[][] dp = new int[s.length()+1][rev.length()+1];
-        return tabulation(s , rev , dp);
+        // int[][] dp = new int[s.length()+1][rev.length()+1];
+        // return tabulation(s , rev , dp);
+
+        // SPACE_OPTIMIZATION
+        return space_optimization(s , rev);
     }
 }
