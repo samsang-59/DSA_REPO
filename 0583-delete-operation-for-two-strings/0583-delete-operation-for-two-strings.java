@@ -82,18 +82,19 @@ class Solution {
         // return word1.length() - LCS + word2.length() - LCS;
 
         // MEMOIZATION
-        int[][] dp = new int[word1.length()+1][word2.length()+1];
-        for(int i=0;i<dp.length;i++){
-            for(int j=0;j<dp[0].length;j++){
-                dp[i][j] = -1;
-            }
-        }
-        int LCS = memoization(word1 , word2 , 0 , 0 , dp);
-        return word1.length() - LCS + word2.length() - LCS;
+        // int[][] dp = new int[word1.length()+1][word2.length()+1];
+        // for(int i=0;i<dp.length;i++){
+        //     for(int j=0;j<dp[0].length;j++){
+        //         dp[i][j] = -1;
+        //     }
+        // }
+        // int LCS = memoization(word1 , word2 , 0 , 0 , dp);
+        // return word1.length() - LCS + word2.length() - LCS;
 
         // TABULATION
-        // int[][] dp = new int[s.length()+1][rev.length()+1];
-        // return tabulation(s , rev , dp);
+        int[][] dp = new int[word1.length()+1][word2.length()+1];
+        int LCS = tabulation(word1 , word2 , dp);
+        return word1.length() - LCS + word2.length() - LCS;
 
         // SPACE_OPTIMIZATION
         // return space_optimization(s , rev);
