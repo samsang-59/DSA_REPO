@@ -32,18 +32,47 @@ class Solution {
         return dp[i][j];
     }
 
+    public int tabulation(String s , String t , int[][] dp){
+        for(int i=0;i<dp[0].length;i++){
+            dp[s.length()][i] = 0;
+        }
+
+        for(int j=0;j<dp.length;j++){
+            dp[j][t.length()] = 1;
+        }
+
+        for(int i=s.length()-1;i>=0;i--){
+            for(int j=t.length()-1;j>=0;j--){
+                int pick = 0 , not_pick = 0;
+                if(s.charAt(i)==t.charAt(j)){
+                    pick = dp[i+1][j+1];
+                    not_pick = dp[i+1][j];
+                }
+                else{
+                    not_pick = dp[i+1][j];
+                }
+                dp[i][j] = pick + not_pick ;
+            }
+        }
+        return dp[0][0];
+    }
+
     public int numDistinct(String s, String t) {
         
         // RECURRSION
         // return recurrsion(s , t , 0 , 0);
 
         // MEMOIZATION
+        // int[][] dp = new int[s.length()+1][t.length()+1];
+        // for(int i=0;i<dp.length;i++){
+        //     for(int j=0;j<dp[0].length;j++){
+        //         dp[i][j] = -1;
+        //     }
+        // }
+        // return memoization(s , t , 0 , 0 , dp);
+
+        // TABULATION
         int[][] dp = new int[s.length()+1][t.length()+1];
-        for(int i=0;i<dp.length;i++){
-            for(int j=0;j<dp[0].length;j++){
-                dp[i][j] = -1;
-            }
-        }
-        return memoization(s , t , 0 , 0 , dp);
+        return tabulation(s , t , dp);
     }
 }
