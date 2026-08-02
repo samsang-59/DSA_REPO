@@ -63,6 +63,34 @@ class Solution {
         return dp[0][0];
     }
 
+    public int space_optimization(String word1 , String word2){
+        int[] next = new int[word2.length()+1];
+
+        // if word1 is empty
+        for(int i=0;i<=word2.length();i++){
+            next[i] = word2.length() - i;
+        }
+
+         for(int i=word1.length()-1;i>=0;i--){
+            int[] curr = new int[word2.length()+1];
+            curr[word2.length()] = word1.length() - i;
+            for(int j=word2.length()-1;j>=0;j--){
+                int match = Integer.MAX_VALUE , not_match = Integer.MAX_VALUE;
+
+                if(word1.charAt(i)==word2.charAt(j)) match = next[j+1];
+                int insert = 1 + curr[j+1];
+                int delete = 1 + next[j];
+                int replace = 1 + next[j+1];
+                not_match = Math.min(insert , Math.min(delete , replace));
+                curr[j] = Math.min(match , not_match); 
+            }
+            next = curr;
+        }
+        return next[0];
+
+
+    }
+
     public int minDistance(String word1, String word2) {
         // RECURRSION
         // return recurrsion(word1 , word2 , 0 , 0);
@@ -77,7 +105,10 @@ class Solution {
         // return memoization(word1 , word2 , 0 , 0 , dp);
 
         // TABULATION
-        int[][] dp = new int[word1.length()+1][word2.length()+1];
-        return tabulation(word1 , word2 , dp);
+        // int[][] dp = new int[word1.length()+1][word2.length()+1];
+        // return tabulation(word1 , word2 , dp);
+
+        // SPACE OPTIMIZATION
+        return space_optimization(word1 , word2);
     }
 }
