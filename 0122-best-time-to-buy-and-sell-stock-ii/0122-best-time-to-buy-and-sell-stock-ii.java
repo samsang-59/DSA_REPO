@@ -74,6 +74,40 @@ class Solution {
         return dp[0][0];
     }
 
+    public int space_optimization(int[] prices){
+        int[] next = new int[2];
+        for(int i=0;i<next.length;i++){
+            next[i] = 0;
+        }
+        for(int index=prices.length-1;index>=0;index--){
+            int[] curr = new int[2];
+            for(int holding = 0 ; holding<2;holding++){
+                int BuyStocks = Integer.MIN_VALUE , SellStocks = Integer.MIN_VALUE;
+        
+                // you need to buy here you can't sell
+                if(holding==0){
+                    int buy = next[1] - prices[index];
+                    int skip = next[0];
+                    BuyStocks = Math.max(BuyStocks , Math.max(buy , skip));
+                }
+
+                // Selling part
+                if(holding==1){
+                    int sell = next[0] + prices[index];
+                    int skip = next[1];
+                    SellStocks = Math.max(SellStocks , Math.max(sell , skip));
+                }
+
+                curr[holding] = Math.max(BuyStocks , SellStocks);
+            }
+            next = curr;
+        }
+        return next[0];
+
+
+
+    }
+
     public int maxProfit(int[] prices) {
         
         // RECURRSION
@@ -89,7 +123,10 @@ class Solution {
         // return memoization(prices , 0 , 0 , dp);
 
         // TABULATION
-        int[][] dp = new int[prices.length+1][2];
-        return tabulation(prices , dp);
+        // int[][] dp = new int[prices.length+1][2];
+        // return tabulation(prices , dp);
+
+        // SPACE OPTIMIZATION
+        return space_optimization(prices);
     }
 }
