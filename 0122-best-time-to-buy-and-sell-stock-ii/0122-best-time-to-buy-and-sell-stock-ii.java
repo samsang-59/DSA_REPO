@@ -45,18 +45,51 @@ class Solution {
         return dp[index][holding];
     }
 
+    public int tabulation(int[] prices , int[][] dp){
+        for(int i=0;i<dp[0].length;i++){
+            dp[prices.length][i] = 0;
+        }
+
+        for(int index=prices.length-1;index>=0;index--){
+            for(int holding = 0 ; holding<2;holding++){
+                int BuyStocks = Integer.MIN_VALUE , SellStocks = Integer.MIN_VALUE;
+        
+                // you need to buy here you can't sell
+                if(holding==0){
+                    int buy = dp[index+1][1] - prices[index];
+                    int skip = dp[index+1][0];
+                    BuyStocks = Math.max(BuyStocks , Math.max(buy , skip));
+                }
+
+                // Selling part
+                if(holding==1){
+                    int sell = dp[index+1][0] + prices[index];
+                    int skip = dp[index+1][1];
+                    SellStocks = Math.max(SellStocks , Math.max(sell , skip));
+                }
+
+                dp[index][holding] = Math.max(BuyStocks , SellStocks);
+            }
+        }
+        return dp[0][0];
+    }
+
     public int maxProfit(int[] prices) {
         
         // RECURRSION
         // return recurrsion(prices , 0 , 0);
 
         // MEMOIZATION
+        // int[][] dp = new int[prices.length+1][2];
+        // for(int i=0;i<dp.length;i++){
+        //     for(int j=0;j<dp[0].length;j++){
+        //         dp[i][j] = -1;
+        //     }
+        // }
+        // return memoization(prices , 0 , 0 , dp);
+
+        // TABULATION
         int[][] dp = new int[prices.length+1][2];
-        for(int i=0;i<dp.length;i++){
-            for(int j=0;j<dp[0].length;j++){
-                dp[i][j] = -1;
-            }
-        }
-        return memoization(prices , 0 , 0 , dp);
+        return tabulation(prices , dp);
     }
 }
