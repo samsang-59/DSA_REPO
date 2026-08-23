@@ -21,7 +21,7 @@ class Solution {
                 }
             }
             else {
-                st.push(s.charAt(i));
+                return false;
             }
         }
         if(st.isEmpty()) return true;
