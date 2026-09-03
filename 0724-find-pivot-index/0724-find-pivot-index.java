@@ -1,23 +1,24 @@
 class Solution {
     public int find_sum(int[] nums){
-        int SUM = 0;
+        int add = 0;
         for(int i=0;i<nums.length;i++){
-            SUM += nums[i];
+            add += nums[i];
         }
-        return SUM;
+        return add;
     }
     public int pivotIndex(int[] nums) {
-        int sum = find_sum(nums);
-        int left = 0 , right = 0;
+       int sum = find_sum(nums);
 
-        for(int i=0;i<nums.length;i++){
-            right = sum-left-nums[i];
+       int currentSum = 0;
+       for(int i=0;i<nums.length;i++){
+            currentSum += nums[i];
 
-            if(left == right) return i;
-            
-            left += nums[i];
-        }
+            if(sum - currentSum == currentSum - nums[i]){
+                return i;
+            } 
+       }
 
-        return -1;
+      
+       return -1;
     }
 }
