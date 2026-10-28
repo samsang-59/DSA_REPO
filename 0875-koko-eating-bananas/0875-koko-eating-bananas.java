@@ -1,29 +1,33 @@
 class Solution {
-    public int max(int[] piles){
-        int MAX = Integer.MIN_VALUE;
+    public boolean count_hours(int[] piles , int h , int mid){
+        int total = 0;
         for(int i=0;i<piles.length;i++){
-            MAX = Math.max(MAX , piles[i]);
+            total += Math.ceil((double)piles[i]/mid);
+            if(total > h) return false;
         }
-        return MAX;
+        return true;
     }
-    public boolean isFeasible(int mid , int h , int[] piles){
-        int totalhours = 0;
+    public int max(int[] piles){
+        int max = Integer.MIN_VALUE;
         for(int i=0;i<piles.length;i++){
-            totalhours += Math.ceil((double)piles[i]/mid);
+            max = Math.max(max , piles[i]);
         }
-        if(totalhours <= h) return true;
-        return false;
+        return max;
     }
     public int minEatingSpeed(int[] piles, int h) {
-        int low = 1 , high = max(piles) , res = 0;
+        int low = 1 , high = max(piles);
+        int res = -1;
 
         while(low <= high){
-            int mid = low + (high - low)/2;
-            boolean ans = isFeasible (mid , h , piles);
-            if(ans){
+            int mid = (low + high)/2;
+            
+
+            boolean ans = count_hours(piles , h , mid);
+            if(ans==true){
                 res = mid;
                 high = mid - 1;
-            }else{
+            }
+            else {
                 low = mid + 1;
             }
         }
