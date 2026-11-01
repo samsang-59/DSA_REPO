@@ -1,44 +1,48 @@
 class Solution {
     public int max(int[] weights){
-        int MAX = Integer.MIN_VALUE;
+        int Max = Integer.MIN_VALUE;
         for(int i=0;i<weights.length;i++){
-            MAX = Math.max(MAX , weights[i]);
+            Max = Math.max(Max , weights[i]);
         }
-        return MAX;
+        return Max;
     }
-    public int SUM(int[] weights){
+
+    public int total(int[] weights){
         int sum = 0;
         for(int i=0;i<weights.length;i++){
             sum += weights[i];
         }
         return sum;
     }
-    public boolean isFeasible(int mid , int[] weights , int days){
-        int Days = 1 , capacity = 0;
+
+    public boolean is_feasible(int[] weights , int days , int mid){
+        int curr_load = 0 , count = 1;
+        
         for(int i=0;i<weights.length;i++){
-            capacity += weights[i];
-            if(capacity > mid){
-                capacity = weights[i];
-                Days++;
+            curr_load += weights[i];
+            if(curr_load > mid){
+                curr_load = weights[i];
+                count++;
             }
         }
-
-        if(Days <= days) return true;
+        if(count<=days) return true;
         return false;
     }
-    public int shipWithinDays(int[] weights, int days) {
-        int low = max(weights) , high = SUM(weights) , res = -1;
 
-        while(low <= high){
-            int mid = low + (high - low)/2;
-            boolean ans = isFeasible(mid , weights , days);
-            if(ans){
-                res = mid;
-                high = mid - 1;
-            }else {
-                low = mid + 1;
-            }
+    public int shipWithinDays(int[] weights, int days) {
+       int low = max(weights) , high = total(weights);
+       int res = -1; 
+       while(low<=high){
+        int mid = (low + high)/2;
+        boolean ans = is_feasible(weights , days , mid);
+        if(ans){
+            res = mid;
+            high = mid - 1;
         }
-        return res;
+        else {
+            low = mid + 1;
+        }
+       }
+       return res;
     }
 }
